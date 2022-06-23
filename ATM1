@@ -1,0 +1,231 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+国际语言;//1-中文，2-英语
+
+结构帐户
+{
+字符名称[100];
+字符 ID 卡[19];
+字符 tel[12];
+字符用户名[100];
+字符密码[100];
+浮动货币;
+
+struct Account * next;//下一个结点的地址
+};
+类型定义结构帐户帐户;
+
+Account * head=NULL;//指向头结点的指针
+Account * tail=NULL;//指向尾结点的指针
+
+void loadData（）
+{
+FILE* fp=fopen（“D：/atm.txt”，“r”）;
+if（fp！=NULL）
+	{
+while（！feof（fp））
+		{
+创建结点
+Account * newNode=（Account *）malloc（sizeof（Account））;
+
+结点初始化
+newNode->next=NULL;
+fscanf（fp，“%s %s\n”，newNode->username，newNode->password）;
+
+添加结点到链表
+if（head==NULL）
+			{
+head=newNode;
+tail=newNode;
+			} 
+还
+			{
+tail->next=newNode;
+tail=newNode;
+			}
+		}
+fclose（fp）;
+printf（“加载成功！\n”）;
+	}
+}
+
+void signUp（）
+{
+申请一块内存空间，将其地址赋值给指针newNodeP
+Account * newNodeP=（Account *）malloc（sizeof（Account））;
+
+为节点赋值
+如果（语言==1）
+	{
+printf（“输入姓名：\n”）;
+	}
+else if（language==2）
+	{
+printf（“输入名称：\n”）;
+	}
+scanf（“%s”，newNodeP->name）;
+
+如果（语言==1）
+	{
+printf（“输入身份证：\n”）;
+	}
+else if（language==2）
+	{
+printf（“Input idCard：\n”）;
+	}
+scanf（“%s”，newNodeP->idCard）;
+
+如果（语言==1）
+	{
+printf（“输入电话：\n”）;
+	}
+else if（language==2）
+	{
+printf（“Input tel：\n”）;
+	}
+scanf（“%s”，newNodeP->tel）;
+
+如果（语言==1）
+	{
+printf（“输入卡号：\n”）;
+	}
+else if（language==2）
+	{
+printf（“输入用户名：\n”）;
+	}
+scanf（“%s”，newNodeP->用户名）;
+
+如果（语言==1）
+	{
+printf（“输入密码：\n”）;
+	}
+else if（language==2）
+	{
+printf（“输入密码：\n”）;
+	}
+scanf（“%s”，newNodeP->password）;
+
+newNodeP->money=0.0f;
+newNodeP->next=NULL;
+
+将结点添加到链表
+if（head==NULL）
+	{
+head=newNodeP;
+tail=newNodeP;
+	}
+还
+	{
+tail->next=newNodeP;
+tail=newNodeP;
+	}
+
+如果（语言==1）
+	{
+		printf("添加成功！\n");
+	}
+	else if(language==2)
+	{
+		printf("added！\n");
+	}
+}
+
+void signIn()
+{
+
+}
+
+void showMenu()
+{
+	while(1)
+	{
+		system("cls");
+		if(language==1)
+		{
+			printf("按1, 开户\n");
+			printf("按2, 登陆\n");
+			printf("按3, 退出\n");
+		}
+		else if(language==2)
+		{
+			printf("Press 1, sign up\n");
+			printf("Press 2, sign in\n");
+			printf("Press 3，sign out\n");
+		}
+		int n;
+		scanf("%d",&n);
+		if(n==1)
+		{
+			signUp();
+		}
+		else if(n==2)
+		{
+			signIn();
+		}
+		else if(n==3)
+		{
+			return; 
+		}
+	}
+}
+
+void printLinkedList()
+{
+	Account * curP=head;
+	while(curP!=NULL)
+	{
+		printf("%s %s\n",curP->name,curP->username);
+		curP=curP->next;
+		printf("%s %s\n",curp->username,curp->password);
+		curp=curp->next;
+	}
+}
+
+void loadDate()
+{
+	FILE* fp=fopen("D:/ATM.txt","r");
+if（fp！=NULL）
+	{
+while（！feof（fp））
+		{
+创建节点
+Account * newNode=（Account *）malloc（sizeof（Account））;
+
+节点初始化
+newNode->next=NULL;
+fscanf（fp，“%s %s\n”，newNode->username，newNode->password）;
+
+添加节点到链表
+if（head==NULL）
+			{
+head=newNode;
+tail=newNode;
+			}
+还
+			{
+tail->next=newNode;
+tail=newNode;
+			}
+
+		}
+fclose（fp）;
+printf（“加载成功！\n”）;
+	}
+}
+
+int main（）
+{
+printf（“欢迎来到王者银行\n”）;
+printf（“欢迎来到XXX银行\n”）;
+
+printf（“按1，中文服务\n”）;
+printf（“Press 2，English Service\n”）;
+scanf（“%d”，&language）;
+
+showMenu（）;
+
+printLinkedList（）;
+
+返回 0;
+}
